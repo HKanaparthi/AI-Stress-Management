@@ -41,7 +41,7 @@ export default function AssessmentPage() {
       // Convert all values to numbers
       const numericData = Object.fromEntries(
         Object.entries(data).map(([key, value]) => [key, Number(value)])
-      ) as AssessmentData;
+      ) as unknown as AssessmentData;
 
       const response = await assessmentAPI.submit(numericData);
       toast.success('Assessment submitted successfully!');

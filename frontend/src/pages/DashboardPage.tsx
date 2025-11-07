@@ -25,7 +25,6 @@ export default function DashboardPage() {
       console.log('=== Loading Dashboard Data ===');
       console.log('API URL:', import.meta.env.VITE_API_URL);
       console.log('Token exists:', !!localStorage.getItem('token'));
-      console.log('User from store:', user);
 
       const history = await assessmentAPI.getHistory(1, 5);
       console.log('Received history:', history);

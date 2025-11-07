@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Brain, Shield, TrendingUp, Users, ArrowRight, CheckCircle } from 'lucide-react';
+import { Brain, Shield, TrendingUp, Users, ArrowRight } from 'lucide-react';
 
 export default function LandingPage() {
   return (

@@ -6,7 +6,7 @@ import { Brain, ArrowLeft, TrendingUp, Calendar, AlertCircle, ChevronRight, LogO
 import type { Assessment, TrendData, Statistics } from '@/types';
 
 export default function HistoryPage() {
-  const { user, logout } = useAuthStore();
+  const { logout } = useAuthStore();
   const navigate = useNavigate();
   const [assessments, setAssessments] = useState<Assessment[]>([]);
   const [trends, setTrends] = useState<TrendData[]>([]);
@@ -65,10 +65,6 @@ export default function HistoryPage() {
       hour: '2-digit',
       minute: '2-digit',
     });
-  };
-
-  const getStressLevelCount = (level: string) => {
-    return assessments.filter(a => a.stress_level === level).length;
   };
 
   if (loading && page === 1) {
