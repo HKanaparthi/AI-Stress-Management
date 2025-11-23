@@ -16,7 +16,48 @@ class MLService:
         self.scaler = None
         self.feature_names = []
         self.feature_importance = {}
+        self.model_name = ""
         self.load_model()
+
+    def compute_engineered_features(self, features_dict):
+        """
+        Compute engineered features from base assessment data.
+        These features are created during training and must be computed at prediction time.
+        """
+        engineered = features_dict.copy()
+
+        # Mental composite: combines anxiety, depression, and inverse self-esteem
+        anxiety = features_dict.get('anxiety_level', 0)
+        depression = features_dict.get('depression', 0)
+        self_esteem = features_dict.get('self_esteem', 15)  # Default to middle value
+        engineered['mental_composite'] = anxiety + depression + (1 - self_esteem/30) * 30
+
+        # Physical health: combines headache, blood pressure, and breathing problems
+        headache = features_dict.get('headache', 0)
+        blood_pressure = features_dict.get('blood_pressure', 0)
+        breathing = features_dict.get('breathing_problem', 0)
+        engineered['physical_health'] = headache + blood_pressure + breathing
+
+        # Academic stress: combines study load, inverse academic performance, and career concerns
+        study_load = features_dict.get('study_load', 0)
+        academic_perf = features_dict.get('academic_performance', 3)
+        career_concerns = features_dict.get('future_career_concerns', 0)
+        engineered['academic_stress'] = study_load + (5 - academic_perf) + career_concerns
+
+        # Social wellbeing: combines social support and inverse peer pressure/bullying
+        social_support = features_dict.get('social_support', 3)
+        peer_pressure = features_dict.get('peer_pressure', 0)
+        bullying = features_dict.get('bullying', 0)
+        engineered['social_wellbeing'] = social_support + (5 - peer_pressure) + (5 - bullying)
+
+        # Environment quality: combines living conditions, safety, basic needs minus noise
+        living = features_dict.get('living_conditions', 3)
+        safety = features_dict.get('safety', 3)
+        basic_needs = features_dict.get('basic_needs', 3)
+        noise = features_dict.get('noise_level', 0)
+        engineered['environment_quality'] = living + safety + basic_needs - noise
+
+        return engineered
 
     def load_model(self):
         """Load the trained model"""
@@ -30,8 +71,11 @@ class MLService:
             self.scaler = model_data['scaler']
             self.feature_names = model_data['feature_names']
             self.feature_importance = model_data['feature_importance']
+            self.model_name = model_data.get('model_name', 'Unknown')
 
             print(f"Model loaded successfully from {self.model_path}")
+            print(f"Model type: {self.model_name}")
+            print(f"Features: {len(self.feature_names)}")
         except Exception as e:
             print(f"Error loading model: {e}")
             raise
@@ -47,6 +91,11 @@ class MLService:
             Dictionary with prediction results
         """
         try:
+            # Check if model uses engineered features (25 features instead of 20)
+            if len(self.feature_names) > 20:
+                # Compute engineered features
+                features_dict = self.compute_engineered_features(features_dict)
+
             # Convert dictionary to feature array in correct order
             features = [features_dict.get(name, 0) for name in self.feature_names]
 

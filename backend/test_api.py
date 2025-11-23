@@ -1,8 +1,12 @@
 import requests
 import json
+import os
 
-# First, register and login to get token
-BASE_URL = "http://localhost:5001"
+# Use PORT from environment or default to 5001
+PORT = os.getenv('PORT', '5001')
+BASE_URL = f"http://localhost:{PORT}"
+
+print(f"Testing API at: {BASE_URL}")
 
 # Register
 register_data = {

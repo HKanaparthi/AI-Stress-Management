@@ -18,5 +18,10 @@
   "social_support",
   "peer_pressure",
   "extracurricular_activities",
-  "bullying"
+  "bullying",
+  "mental_composite",
+  "physical_health",
+  "academic_stress",
+  "social_wellbeing",
+  "environment_quality"
 ]

@@ -22,34 +22,15 @@ export default function DashboardPage() {
 
   const loadDashboardData = async () => {
     try {
-      console.log('=== Loading Dashboard Data ===');
-      console.log('API URL:', import.meta.env.VITE_API_URL);
-      console.log('Token exists:', !!localStorage.getItem('token'));
-
       const history = await assessmentAPI.getHistory(1, 5);
-      console.log('Received history:', history);
-      console.log('Total assessments:', history.total);
-      console.log('Assessments array length:', history.assessments?.length);
-      console.log('Assessments array:', history.assessments);
-
       setRecentAssessments(history.assessments || []);
       setStats({
         total: history.total || 0,
         latestStressLevel: history.assessments?.[0]?.stress_level || null,
         latestDate: history.assessments?.[0]?.created_at || null,
       });
-      console.log('Stats set to:', {
-        total: history.total || 0,
-        latestStressLevel: history.assessments?.[0]?.stress_level || null,
-        latestDate: history.assessments?.[0]?.created_at || null,
-      });
-    } catch (error: any) {
-      console.error('=== ERROR loading dashboard data ===');
-      console.error('Error:', error);
-      console.error('Error message:', error.message);
-      console.error('Error response:', error.response);
-      console.error('Error response data:', error.response?.data);
-      console.error('Error response status:', error.response?.status);
+    } catch (error) {
+      // Error handled silently - user sees empty state
     } finally {
       setLoading(false);
     }

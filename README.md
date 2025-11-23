@@ -26,7 +26,7 @@ Student Stress Monitor is a comprehensive web application that uses machine lear
 
 ### Key Highlights
 
-- **High Accuracy**: Random Forest classifier achieves 85%+ accuracy with F1-score ≥ 0.82
+- **High Accuracy**: Machine Learning models achieve 88%+ accuracy with F1-score ≥ 0.88
 - **Real-time Analysis**: Instant stress level predictions with confidence scores
 - **Personalized Recommendations**: Rule-based recommendation engine provides tailored coping strategies
 - **Historical Tracking**: Monitor stress trends over time with interactive visualizations
@@ -51,12 +51,13 @@ Student Stress Monitor is a comprehensive web application that uses machine lear
 - **System Monitoring**: Track usage metrics and system performance
 
 ### Machine Learning Model
-- **Algorithm**: Random Forest Classifier with hyperparameter tuning
-- **Features**: 20 input features including anxiety, depression, sleep quality, academic performance
+- **Algorithm**: Multiple models compared (Random Forest, Gradient Boosting, SVM, Logistic Regression, AdaBoost)
+- **Features**: 20 base input features + 5 engineered composite features
 - **Performance**:
-  - Accuracy: ≥85%
-  - F1-Score: ≥0.82
+  - Accuracy: 88.6%
+  - F1-Score: 0.88
   - Cross-validation: 5-fold CV
+- **Feature Engineering**: Composite features for mental health, physical health, academic stress, social wellbeing, environment quality
 - **Feature Importance**: Identifies top stress contributors for each assessment
 
 ## Architecture
@@ -187,7 +188,7 @@ student-stress-monitor/
    python app.py
    ```
 
-   Server will start at `http://localhost:5000`
+   Server will start at `http://localhost:5001`
 
 ### Frontend Setup
 
@@ -204,7 +205,7 @@ student-stress-monitor/
 3. **Configure environment variables**
    ```bash
    # Create .env file
-   echo "VITE_API_URL=http://localhost:5000" > .env
+   echo "VITE_API_URL=http://localhost:5001" > .env
    ```
 
 4. **Run the development server**
@@ -277,7 +278,7 @@ Administrators and counselors can access:
 
 ### Base URL
 ```
-Development: http://localhost:5000/api
+Development: http://localhost:5001/api
 Production: https://your-domain.com/api
 ```
 
@@ -668,10 +669,10 @@ Use tools like Postman or cURL to test endpoints:
 
 ```bash
 # Health check
-curl http://localhost:5000/health
+curl http://localhost:5001/health
 
 # Register user
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://localhost:5001/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{"email":"test@example.com","password":"test123","first_name":"Test","last_name":"User"}'
 ```
@@ -683,7 +684,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 **Backend won't start**
 - Check Python version (3.8+)
 - Verify all dependencies installed
-- Check if port 5000 is available
+- Check if port 5001 is available
 - Verify .env file exists
 
 **Frontend won't start**

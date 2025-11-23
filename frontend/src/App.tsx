@@ -11,6 +11,7 @@ import AssessmentPage from './pages/AssessmentPage';
 import ResultsPage from './pages/ResultsPage';
 import HistoryPage from './pages/HistoryPage';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminUserDetail from './pages/AdminUserDetail';
 import ProfilePage from './pages/ProfilePage';
 
 // Protected Route Component
@@ -122,6 +123,15 @@ function App() {
           element={
             <AdminRoute>
               <AdminDashboard />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/users/:id"
+          element={
+            <AdminRoute>
+              <AdminUserDetail />
             </AdminRoute>
           }
         />
