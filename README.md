@@ -744,13 +744,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - React and Flask communities
 - Contributors and testers
 
-## Contact
-
-- **Project Maintainer**: Your Name
-- **Email**: your.email@example.com
-- **GitHub**: @yourusername
-- **Website**: https://your-website.com
-
 ---
 
 **Emergency Resources**
