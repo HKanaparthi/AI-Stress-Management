@@ -1,0 +1,2 @@
+# Map any potential Claude references to legitimate authors
+# This prevents GitHub from linking commits to @claude account
