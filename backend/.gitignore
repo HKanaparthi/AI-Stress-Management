@@ -56,3 +56,6 @@ htmlcov/
 
 # ML Models (keep the trained model)
 # Add specific large files if needed
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
